@@ -5,6 +5,7 @@ description = "Add your description here"
 requires-python = ">=3.10"
 dependencies = [
     "alembic>=1.18.5",
+    "beautifulsoup4>=4.15.0",
     "fastapi>=0.139.2",
     "psycopg2-binary>=2.9.12",
     "pydantic>=2.13.4",
