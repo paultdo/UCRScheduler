@@ -26,7 +26,8 @@ class Meeting(Base):
     friday: Mapped[bool] = mapped_column(default=False)
     saturday: Mapped[bool] = mapped_column(default=False)
     sunday: Mapped[bool] = mapped_column(default=False)
-    building: Mapped[str] = mapped_column(String(200))
-    room: Mapped[str] = mapped_column(String(20))
+    building: Mapped[Optional[str]] = mapped_column(String(200))
+    room: Mapped[Optional[str]] = mapped_column(String(20))
+    meeting_type: Mapped[Optional[str]] = mapped_column(String(10))
 
     section: Mapped["Section"] = relationship(back_populates="meetings")

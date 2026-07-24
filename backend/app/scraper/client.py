@@ -18,5 +18,7 @@ class BannerClient:
 
 
     def select_term(self, term_code: str):
+        pass
 
     def search_subject(self, subject: str, term_code: str):
+        pass
