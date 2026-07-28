@@ -15,8 +15,8 @@ def parse_section(section_data: dict) -> Section:
     term_code = section_data["term"]
     sequenceNumber = section_data["sequenceNumber"]
     scheduleTypeDescription = section_data["scheduleTypeDescription"]
-    link_type = section_data["linkIdentifier"][0]
-    link_group = section_data["linkIdentifier"][1:]
+    link_type = section_data["linkIdentifier"][0] if section_data["linkIdentifier"] else None
+    link_group = section_data["linkIdentifier"][1:] if section_data["linkIdentifier"] else None
     maximumEnrollment = section_data["maximumEnrollment"]
     seatsAvailable = section_data["seatsAvailable"]
     instructor = None

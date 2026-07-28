@@ -12,7 +12,7 @@ def ingest_subject(db: Session, subject: str, term_code: str):
     client.select_term(term_code)
     response = client.search_subject(subject, term_code)
 
-    for section in response["data"]:
+    for section in response:
         stmt = db.execute(select(Section).where(Section.crn == section["courseReferenceNumber"])).scalar_one_or_none()
         if stmt:
             continue

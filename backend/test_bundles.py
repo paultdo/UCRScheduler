@@ -3,7 +3,11 @@ from app.models.course import Course
 from app.scheduler.bundles import build_bundles
 
 db = SessionLocal()
-course = db.query(Course).filter_by(subjectCourse="CS010A").first()
+
+# from app.models.course import Course
+# all_courses = db.query(Course).filter(Course.subjectCourse.like("CS%")).all()
+# print([c.subjectCourse for c in all_courses])
+course = db.query(Course).filter_by(subjectCourse="CS010C").first()
 bundles = build_bundles(course)
 
 print(len(course.sections))

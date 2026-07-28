@@ -27,14 +27,37 @@ class BannerClient:
         return response
 
     def search_subject(self, subject: str, term_code: str):
+        offset = 0
         params = {
             "txt_subject": subject,
             "txt_term": term_code,
-            "pageOffset": 0,
+            "pageOffset": offset,
             "pageMaxSize": 50
         }
+        currCount = 0
+        totalCount = 0
+        data = []
         response = self.session.get(f"{BASE_URL}/searchResults/searchResults", params=params,
                                      headers={"X-Synchronizer-Token": self.token})
         if not response:
             raise RuntimeError("Could not get search results")
-        return response.json()
+
+        response_obj = response.json()
+        totalCount = response_obj['totalCount']
+        data = response_obj['data']
+        currCount += len(data)
+
+        while currCount < totalCount:
+            offset += 50
+            params["pageOffset"] = offset
+            response = self.session.get(f"{BASE_URL}/searchResults/searchResults", params=params,
+                                     headers={"X-Synchronizer-Token": self.token})
+            if not response:
+                raise RuntimeError("Could not get search results")
+
+            response_obj = response.json()
+            data += response_obj['data']
+            currCount = len(data)
+
+
+        return data
