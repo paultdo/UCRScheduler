@@ -14,3 +14,24 @@ def bundles_conflict(bundle_a: tuple[Section, ...], bundle_b: tuple[Section, ...
 
 
 
+def find_schedules(course_bundles: list[list[tuple]], index, current, results):
+    if index >= len(course_bundles):
+        results.append(current.copy())
+        return
+
+    for bundle in course_bundles[index]:
+        conflict = False
+        for correct_bundle in current:
+            if conflict:
+                break
+            if bundles_conflict(bundle, correct_bundle):
+                conflict = True
+                continue
+
+        if conflict:
+            continue
+
+
+        current.append(bundle)
+        find_schedules(course_bundles, index + 1, current, results)
+        current.pop()
