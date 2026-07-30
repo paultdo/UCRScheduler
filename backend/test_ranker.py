@@ -3,6 +3,7 @@ from app.models.section import Section
 from app.scheduler.ranker import schedule_latest_end_time  # adjust path
 from app.scheduler.ranker import schedule_earliest_start_time
 from app.scheduler.ranker import schedule_days_used
+from app.scheduler.ranker import schedule_total_gap_hours
 
 db = SessionLocal()
 
@@ -24,6 +25,9 @@ result = schedule_earliest_start_time(test_schedule)
 print(result)
 
 result = schedule_days_used(test_schedule)
+print(result)
+
+result = schedule_total_gap_hours(test_schedule)
 print(result)
 
 db.close()
