@@ -2,6 +2,7 @@ from app.database import SessionLocal
 from app.models.section import Section
 from app.scheduler.ranker import schedule_latest_end_time  # adjust path
 from app.scheduler.ranker import schedule_earliest_start_time
+from app.scheduler.ranker import schedule_days_used
 
 db = SessionLocal()
 
@@ -20,6 +21,9 @@ result = schedule_latest_end_time(test_schedule)
 print(result)
 
 result = schedule_earliest_start_time(test_schedule)
+print(result)
+
+result = schedule_days_used(test_schedule)
 print(result)
 
 db.close()
