@@ -18,3 +18,4 @@ class MeetingSchema(BaseModel):
     building: str | None
     room: str | None
     meeting_type: str | None
+ 

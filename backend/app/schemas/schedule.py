@@ -7,6 +7,7 @@ class ScheduleRequestSchema(BaseModel):
     term_code: str
     primary: Literal["earliest_end_time", "latest_start_time"]
     secondary: list[str] = []
+    limit: int = 20
 
 class ScheduleResponseSchema(BaseModel):
     schedules: list[list[list[SectionSchema]]]
