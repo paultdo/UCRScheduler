@@ -18,6 +18,7 @@ router = APIRouter()
 def create_schedule(request: ScheduleRequestSchema, db: Session = Depends(get_db)):
     bundles = []
     for course in request.courses:
+        course = course.upper()
         courseObj = db.execute(select(Course).where(Course.subjectCourse == course)).scalar_one_or_none()
         if not courseObj:
             subject, code = split_subject_course(course)
