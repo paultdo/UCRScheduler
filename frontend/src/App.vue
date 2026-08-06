@@ -1,7 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import CourseInput from './components/CourseInput.vue';
 </script>
 
 <template>
-  <HelloWorld />
+  <CourseInput />
 </template>

@@ -4,7 +4,7 @@ import { ref } from 'vue'
 
 export const useSchedulesStore = defineStore('schedules', () => {
     const courses = ref([])
-    const termCode = ref("")
+    const termCode = ref("202640")
     const primary = ref("")
     const secondary = ref([])
     const schedules = ref([])
