@@ -15,7 +15,7 @@ const addDays = (date, days) => {
   return result;
 };
 
-export function meetingToEvents(meeting, sectionLabel) {
+function meetingToEvents(meeting, sectionLabel) {
     if (!meeting.begin_time || !meeting.end_time) {
         return []
     }
@@ -42,3 +42,5 @@ export function meetingToEvents(meeting, sectionLabel) {
     return list
 
 }
+
+export { REFERENCE_MONDAY, meetingToEvents }

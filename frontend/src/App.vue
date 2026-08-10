@@ -2,6 +2,7 @@
 import CourseInput from './components/CourseInput.vue';
 import ScheduleBrowser from './components/ScheduleBrowser.vue';
 import { meetingToEvents } from './utils/calendarTransform.js'
+import ScheduleGrid from './components/ScheduleGrid.vue';
 
 const fakeMeeting = {
     id: 1,

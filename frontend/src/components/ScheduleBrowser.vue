@@ -1,6 +1,8 @@
 <script setup>
     import { useSchedulesStore } from '../stores/schedule';
+    import ScheduleGrid from './ScheduleGrid.vue';
     const store = useSchedulesStore()
+    
 
     function decrement() {
         if(store.currentIndex > 0) {
@@ -26,6 +28,8 @@
                 </ul>
             </li>
         </ul>
+
+        <ScheduleGrid :schedule="store.schedules[store.currentIndex]" />
     </div>
     <div v-else>
         <p>No schedules yet!</p>
@@ -35,4 +39,5 @@
         <p>{{ store.currentIndex + 1 }} of {{ store.schedules.length }}</p>
         <button class="btn btn-secondary" @click="increment" :disabled="store.currentIndex === store.schedules.length - 1">>></button>
     </div>
+
 </template>
