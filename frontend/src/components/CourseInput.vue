@@ -16,6 +16,10 @@ function deleteCourse(deletedCourse) {
 </script>
 
 <template>
+    <div v-if="store.error" class="alert alert-danger" role="alert">
+        {{ store.error }}
+    </div>
+
     <ul class="list-group">
         <li class="list-group-item" v-for="course in store.courses">
             {{ course }}
@@ -44,6 +48,6 @@ function deleteCourse(deletedCourse) {
             <option value="fewest_days">Fewest days</option>
         </select>
 
-        <button class="btn btn-primary" @click="store.fetchSchedules()">Fetch Courses</button>
+        <button class="btn btn-primary" @click="store.fetchSchedules()" :disabled="store.loading"><span v-if="store.loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{{ store.loading ? 'Loading...' : 'Fetch Courses' }}</button>
     </form>
 </template>

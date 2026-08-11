@@ -28,7 +28,13 @@ export const useSchedulesStore = defineStore('schedules', () => {
             schedules.value = response.data["schedules"]
             currentIndex.value = 0
         } catch(e) {
-            error.value = e.message
+            const detail = e.response?.data?.detail
+            if(Array.isArray(detail)) {
+                error.value = detail.map(d => d.msg).join(', ')
+            } else {
+                error.value = detail || e.message
+            }
+            
         } finally {
             loading.value = false
         }

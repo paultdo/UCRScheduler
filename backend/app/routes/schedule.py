@@ -21,9 +21,11 @@ def create_schedule(request: ScheduleRequestSchema, db: Session = Depends(get_db
         course = course.upper()
         courseObj = db.execute(select(Course).where(Course.subjectCourse == course)).scalar_one_or_none()
         if not courseObj:
-            subject, code = split_subject_course(course)
-            ingest_subject(db, subject=subject, term_code=request.term_code)
-
+            try:
+                subject, code = split_subject_course(course)
+                ingest_subject(db, subject=subject, term_code=request.term_code)
+            except ValueError:
+                raise HTTPException(status_code=404, detail=f"Invalid course code: {course}")
         courseObj = db.execute(select(Course).where(Course.subjectCourse == course)).scalar_one_or_none() if not courseObj else courseObj
         if not courseObj:
             raise HTTPException(status_code=404, detail="Course not found!")
