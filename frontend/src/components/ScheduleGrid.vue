@@ -40,6 +40,6 @@ watch(calendarEvents, () => {
 
 <template>
     <div class="border rounded overflow-hidden">
-        <DayPilotCalendar ref="calendarRef" :cellHeight="40" viewType="Week" :startDate="REFERENCE_MONDAY.toISOString().split('T')[0]" :events="calendarEvents" headerDateFormat="dddd" />
+        <DayPilotCalendar ref="calendarRef" :cellHeight="40" viewType="Week" :startDate="REFERENCE_MONDAY.toISOString().split('T')[0]" :events="calendarEvents" headerDateFormat="dddd" eventMoveHandling="Disabled" eventResizeHandling="Disabled"/>
     </div>
 </template>
