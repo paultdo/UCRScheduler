@@ -1,28 +1,18 @@
 <script setup>
-import CourseInput from './components/CourseInput.vue';
-import ScheduleBrowser from './components/ScheduleBrowser.vue';
-import { meetingToEvents } from './utils/calendarTransform.js'
-import ScheduleGrid from './components/ScheduleGrid.vue';
-
-const fakeMeeting = {
-    id: 1,
-    begin_time: "09:30:00",
-    end_time: "10:50:00",
-    monday: true,
-    tuesday: false,
-    wednesday: true,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false
-}
-
-console.log(meetingToEvents(fakeMeeting, "CS010A Lecture (30921)"))
-
-
+import CourseInput from './components/CourseInput.vue'
+import ScheduleBrowser from './components/ScheduleBrowser.vue'
 </script>
 
 <template>
-  <CourseInput />
-  <ScheduleBrowser />
+    <div class="container-fluid py-4">
+        <h1 class="mb-4">UCR Scheduler</h1>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <CourseInput />
+            </div>
+            <div class="col-lg-8">
+                <ScheduleBrowser />
+            </div>
+        </div>
+    </div>
 </template>
