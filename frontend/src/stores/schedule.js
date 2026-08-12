@@ -18,7 +18,7 @@ export const useSchedulesStore = defineStore('schedules', () => {
         loading.value = true
         error.value = null
         try {
-            const response = await axios.post("http://127.0.0.1:8000/schedule", {
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/schedule`, {
                 courses: courses.value,
                 term_code: termCode.value,
                 primary: primary.value,
