@@ -11,8 +11,9 @@ function scheduleToEvents(schedule) {
     const events = []
     for (const bundle of schedule) {
         for (const section of bundle) {
-            const sectionLabel = `${section.scheduleTypeDescription} (${section.crn})`
             for (const meeting of section.meetings) {
+                const location = meeting.building ? `${meeting.building} ${meeting.room}` : 'Online/Arranged'
+                const sectionLabel = `${section.course_code} ${section.scheduleTypeDescription} (${section.crn}) - ${location}`
                 events.push(...meetingToEvents(meeting, sectionLabel))
             }
         }
@@ -39,6 +40,6 @@ watch(calendarEvents, () => {
 
 <template>
     <div class="border rounded overflow-hidden">
-        <DayPilotCalendar ref="calendarRef" viewType="Week" :startDate="REFERENCE_MONDAY.toISOString().split('T')[0]" :events="calendarEvents" headerDateFormat="dddd" />
+        <DayPilotCalendar ref="calendarRef" :cellHeight="40" viewType="Week" :startDate="REFERENCE_MONDAY.toISOString().split('T')[0]" :events="calendarEvents" headerDateFormat="dddd" />
     </div>
 </template>

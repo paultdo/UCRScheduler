@@ -16,5 +16,6 @@ class SectionSchema(BaseModel):
     seatsAvailable: int
     instructor: str | None
     term_code: str
+    course_code: str
     meetings: list[MeetingSchema]
     

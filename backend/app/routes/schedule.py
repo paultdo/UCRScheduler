@@ -14,6 +14,25 @@ from sqlalchemy import select
 
 router = APIRouter()
 
+def convert_section(section):
+    section_dict = {
+        "id": section.id,
+        "course_id": section.course_id,
+        "crn": section.crn,
+        "sequenceNumber": section.sequenceNumber,
+        "scheduleTypeDescription": section.scheduleTypeDescription,
+        "link_type": section.link_type,
+        "link_group": section.link_group,
+        "maximumEnrollment": section.maximumEnrollment,
+        "enrollment": section.enrollment,
+        "seatsAvailable": section.seatsAvailable,
+        "instructor": section.instructor,
+        "term_code": section.term_code,
+        "course_code": section.course.subjectCourse,
+        "meetings": section.meetings,
+    }
+    return SectionSchema.model_validate(section_dict)
+
 @router.post("/schedule", response_model=ScheduleResponseSchema)
 def create_schedule(request: ScheduleRequestSchema, db: Session = Depends(get_db)):
     bundles = []
@@ -39,7 +58,7 @@ def create_schedule(request: ScheduleRequestSchema, db: Session = Depends(get_db
 
     converted_schedules = [
         [
-            [SectionSchema.model_validate(section) for section in bundle] for bundle in schedule
+            [convert_section(section) for section in bundle] for bundle in schedule
         ] for schedule in ranked_schedules
     ]
 
