@@ -1,6 +1,7 @@
 <script setup>
 import { useSchedulesStore } from '../stores/schedule';
 import ScheduleGrid from './ScheduleGrid.vue';
+import { computed, ref } from 'vue';
 const store = useSchedulesStore()
 
 function decrement() {
@@ -14,6 +15,32 @@ function increment() {
         store.currentIndex++
     }
 }
+
+const crnList = computed(() => {
+    const currentSchedule = store.schedules[store.currentIndex]
+    if(!currentSchedule) {
+        return []
+    }
+
+    const crns = []
+    for(const bundle of currentSchedule) {
+        for(const section of bundle) {
+            crns.push(section.crn)
+        }
+    }
+
+    return crns
+})
+
+const justCopied = ref(false)
+
+function copyCrns() {
+    const text = crnList.value.join(', ')
+    navigator.clipboard.writeText(text)
+
+    justCopied.value = true
+    setTimeout(() => { justCopied.value = false }, 2000)
+}
 </script>
 
 <template>
@@ -26,6 +53,9 @@ function increment() {
                         <button class="btn btn-outline-secondary btn-sm" @click="decrement" :disabled="store.currentIndex === 0">&laquo; Prev</button>
                         <span class="text-muted small">{{ store.currentIndex + 1 }} of {{ store.schedules.length }}</span>
                         <button class="btn btn-outline-secondary btn-sm" @click="increment" :disabled="store.currentIndex === store.schedules.length - 1">Next &raquo;</button>
+                        <button class="btn btn-outline-success btn-sm" @click="copyCrns">
+                            {{ justCopied ? 'Copied!' : 'Copy CRNs' }}
+                        </button>
                     </div>
                 </div>
 
