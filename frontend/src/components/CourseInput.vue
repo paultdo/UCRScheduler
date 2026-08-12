@@ -1,6 +1,7 @@
 <script setup>
 import { useSchedulesStore } from "../stores/schedule"
 import { ref } from 'vue'
+import { TERMS } from "../utils/terms"
 
 const store = useSchedulesStore()
 const courseCode = ref("")
@@ -44,7 +45,9 @@ function deleteCourse(deletedCourse) {
 
                 <div class="mb-3">
                     <label for="termCode" class="form-label">Term Code</label>
-                    <input type="text" class="form-control" id="termCode" placeholder="e.g. 202640" v-model="store.termCode">
+                    <select name="termCode" class="form-select" id="termCode" v-model="store.termCode">
+                        <option v-for="term in TERMS" :value="term.code">{{ term.label }}</option>
+                    </select>
                 </div>
 
                 <div class="mb-3">
