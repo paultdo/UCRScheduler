@@ -1,7 +1,8 @@
 from app.models.course import Course
 from app.models.section import Section
 from collections import defaultdict
-from itertools import product
+from itertools import product, combinations
+from app.scheduler.solver import bundles_conflict
 
 def build_bundles(course: Course) -> list[tuple[Section, ...]]:
     sections_group = defaultdict(list)
@@ -19,9 +20,16 @@ def build_bundles(course: Course) -> list[tuple[Section, ...]]:
         arr_cartesian = []
         for arr in link_type_groups[group].values():
             arr_cartesian.append(arr)
-        result.extend(product(*arr_cartesian))
+        valid_candidates = [c for c in product(*arr_cartesian) if not candidate_conflict(c)]
+        result.extend(valid_candidates)
 
     return result
+
+def candidate_conflict(candidate_bundle: tuple) -> bool:
+    for section_a, section_b in combinations(candidate_bundle, 2):
+        if bundles_conflict((section_a,), (section_b,)):
+            return True
+    return False
 
 
     
