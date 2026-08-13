@@ -7,7 +7,7 @@ const store = useSchedulesStore()
 const courseCode = ref("")
 
 function addCourse() {
-    if (!store.courses.includes(courseCode.value.trim())) {
+    if (!store.courses.includes(courseCode.value.trim()) && courseCode.value !== "") {
         store.courses.push(courseCode.value.trim())
     }
     courseCode.value = ""
